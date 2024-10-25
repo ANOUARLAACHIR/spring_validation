@@ -3,6 +3,7 @@ package com.codewa.spring_validation.controller;
 import com.codewa.spring_validation.dto.UserRequest;
 import com.codewa.spring_validation.entity.User;
 import com.codewa.spring_validation.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<User> saveUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest) {
         return new ResponseEntity<>(userService.saveUser(userRequest), HttpStatus.CREATED);
     }
 
