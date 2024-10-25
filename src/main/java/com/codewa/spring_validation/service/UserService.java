@@ -6,6 +6,8 @@ import com.codewa.spring_validation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -20,5 +22,13 @@ public class UserService {
                 userRequest.getGender(), userRequest.getAge(),
                 userRequest.getNationality());
         return userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User getUserById(int id) {
+        return userRepository.findByUserId(id);
     }
 }
