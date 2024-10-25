@@ -2,6 +2,7 @@ package com.codewa.spring_validation.controller;
 
 import com.codewa.spring_validation.dto.UserRequest;
 import com.codewa.spring_validation.entity.User;
+import com.codewa.spring_validation.haldler.UserNotFoundException;
 import com.codewa.spring_validation.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
+    public ResponseEntity<User> getUserById(@PathVariable int id) throws UserNotFoundException {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 }

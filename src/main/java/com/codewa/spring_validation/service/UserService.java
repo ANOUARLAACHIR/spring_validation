@@ -2,6 +2,7 @@ package com.codewa.spring_validation.service;
 
 import com.codewa.spring_validation.dto.UserRequest;
 import com.codewa.spring_validation.entity.User;
+import com.codewa.spring_validation.haldler.UserNotFoundException;
 import com.codewa.spring_validation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(int id) {
-        return userRepository.findByUserId(id);
+    public User getUserById(int id) throws UserNotFoundException {
+        User user = userRepository.findByUserId(id);
+        if (user != null) {
+            return user;
+        }
+        throw new UserNotFoundException("user not found");
     }
 }
